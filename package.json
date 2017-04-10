@@ -1,0 +1,24 @@
+{
+    "name": "ng4-currency-converter",
+    "version": "0.0.1",
+    "scripts": {
+        "build": "tsc",
+        "serve": "tsc && concurrently \"tsc -w\" lite-server"
+    },
+    "dependencies": {
+        "@angular/common": "^4.0.1",
+        "@angular/compiler": "4.0.1",
+        "@angular/core": "4.0.1",
+        "@angular/platform-browser": "4.0.1",
+        "@angular/platform-browser-dynamic": "4.0.1",
+        "core-js": "2.4.1",
+        "rxjs": "5.3.0",
+        "systemjs": "0.20.12",
+        "zone.js": "0.8.5"
+    },
+    "devDependencies": {
+        "typescript": "2.2.2",
+        "concurrently": "3.4.0",
+        "lite-server": "2.3.0"
+    }
+}
