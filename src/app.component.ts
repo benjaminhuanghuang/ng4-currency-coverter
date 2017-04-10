@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'currency-converter',
     template: `
-    Convert: <input id="baseAmountField" type="number" [value]="baseAmount" (input)="update($event.target.value)"> 
+    Convert: <input id="baseAmountField" type="number" [value]="baseAmount" 
+      (input)="update($event.target.value)"> 
     <p>
     <strong>{{baseAmount}}</strong> USD =
     <strong>{{getTargetAmount()}}</strong> GBP
