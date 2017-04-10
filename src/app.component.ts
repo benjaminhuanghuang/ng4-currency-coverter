@@ -5,11 +5,11 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'currency-converter',
     template: `
-    Convert(one-way binding): <input id="baseAmountField" type="number" [value]="baseAmount" 
+    Convert(one-way binding, component->view): <input id="baseAmountField" type="number" [value]="baseAmount" 
       (input)="update1Way($event.target.value)"> 
     <br>
     Convert(tow-way binding): <input type="number" [ngModel]="baseAmount" 
-      (ngModelChange)="basAmount= $event"> 
+      (ngModelChange)="baseAmount= $event"> 
     <br>
     Convert(tow-way binding 2): <input type="number" [(ngModel)]="baseAmount"> 
      <br>
