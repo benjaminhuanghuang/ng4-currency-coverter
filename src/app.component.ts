@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 
+//<button (click)="update(baseAmountValue.value)" >Update</button>
 @Component({
-  selector: 'currency-converter',
-  template: `
-    <input type="number" [value]="baseAmount"> USD =
-    <strong>{{targetAmount}}</strong> GBP
+    selector: 'currency-converter',
+    template: `
+    <input id="baseAmountField" type="number" [value]="baseAmount" (input)="update($event.target.value)"> USD =
+    <strong id="targetAmountText">{{targetAmount}}</strong> GBP
   `,
-  styles: [`
+    styles: [`
     input[type=number] {
       width: 10ex;
       text-align: right;
@@ -14,8 +15,20 @@ import { Component } from '@angular/core';
   `]
 })
 export class AppComponent {
+    exchangeRate = 0.70;
+    baseAmount = 2;
+    targetAmount = this.exchangeRate;
 
-  baseAmount = 1;
-  targetAmount = 0.70;
+    // button click
+    // update(baseAmount){
+    //     console.info("should update", baseAmount);
+    //     this.targetAmount = parseFloat(baseAmount) * this.exchangeRate;
+    // }
+
+    // text changed
+    update(baseAmount) {
+        console.info("should update", baseAmount);
+        this.targetAmount = parseFloat(baseAmount) * this.exchangeRate;
+    }
 
 }
