@@ -13,10 +13,10 @@ import { Component } from '@angular/core';
     <br>
     Convert(tow-way binding 2): <input type="number" [(ngModel)]="baseAmount"> 
      <br>
-    Convert(tow-way binding 3): <input type="number" bindon-ngModel="baseAmount"> 
+    Convert(tow-way binding 3): <input type="number" bindon-ngModel="baseAmount" [class.error]="isInvalid(baseAmount)"> 
     <p>
     <strong>{{baseAmount}}</strong> USD =
-    <strong>{{getTargetAmount()}}</strong> GBP
+    <strong>{{targetAmount}}</strong> GBP
     </p>
   `,
     styles: [`
@@ -24,13 +24,15 @@ import { Component } from '@angular/core';
       width: 10ex;
       text-align: right;
     }
+    .error {
+      background-color:#ff6666;
+    }
   `]
 })
 export class AppComponent {
     exchangeRate = 0.70;
     baseAmount = 2;
-    targetAmount = this.exchangeRate;
-
+    
     // button click
     // update(baseAmount){
     //     console.info("should update", baseAmount);
@@ -41,12 +43,16 @@ export class AppComponent {
     update1Way(baseAmount) {
         console.info("should update", baseAmount);
         this.baseAmount = parseFloat(baseAmount)
-        this.targetAmount = baseAmount * this.exchangeRate;
     }
     update(baseAmount) {
         this.baseAmount = baseAmount;
     }
-    getTargetAmount(){
+    get targetAmount(){
+      console.info('baseAmount valid: ', Number.isFinite(this.baseAmount));
       return this.baseAmount * this.exchangeRate;
+    }
+    isInvalid(value)
+    {
+      return !Number.isFinite(this.baseAmount);
     }
 }
