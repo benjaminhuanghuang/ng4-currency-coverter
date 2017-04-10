@@ -5,8 +5,15 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'currency-converter',
     template: `
-    Convert: <input id="baseAmountField" type="number" [value]="baseAmount" 
-      (input)="update($event.target.value)"> 
+    Convert(one-way binding): <input id="baseAmountField" type="number" [value]="baseAmount" 
+      (input)="update1Way($event.target.value)"> 
+    <br>
+    Convert(tow-way binding): <input type="number" [ngModel]="baseAmount" 
+      (ngModelChange)="basAmount= $event"> 
+    <br>
+    Convert(tow-way binding 2): <input type="number" [(ngModel)]="baseAmount"> 
+     <br>
+    Convert(tow-way binding 3): <input type="number" bindon-ngModel="baseAmount"> 
     <p>
     <strong>{{baseAmount}}</strong> USD =
     <strong>{{getTargetAmount()}}</strong> GBP
@@ -31,10 +38,13 @@ export class AppComponent {
     // }
 
     // text changed
-    update(baseAmount) {
+    update1Way(baseAmount) {
         console.info("should update", baseAmount);
         this.baseAmount = parseFloat(baseAmount)
         this.targetAmount = baseAmount * this.exchangeRate;
+    }
+    update(baseAmount) {
+        this.baseAmount = baseAmount;
     }
     getTargetAmount(){
       return this.baseAmount * this.exchangeRate;
