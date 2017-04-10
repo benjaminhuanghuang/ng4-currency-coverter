@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 
 //<button (click)="update(baseAmountValue.value)" >Update</button>
+//<strong >{{targetAmount}}</strong> GBP
 @Component({
     selector: 'currency-converter',
     template: `
-    <input id="baseAmountField" type="number" [value]="baseAmount" (input)="update($event.target.value)"> USD =
-    <strong id="targetAmountText">{{targetAmount}}</strong> GBP
+    Convert: <input id="baseAmountField" type="number" [value]="baseAmount" (input)="update($event.target.value)"> 
+    <p>
+    <strong>{{baseAmount}}</strong> USD =
+    <strong>{{getTargetAmount()}}</strong> GBP
+    </p>
   `,
     styles: [`
     input[type=number] {
@@ -28,7 +32,10 @@ export class AppComponent {
     // text changed
     update(baseAmount) {
         console.info("should update", baseAmount);
-        this.targetAmount = parseFloat(baseAmount) * this.exchangeRate;
+        this.baseAmount = parseFloat(baseAmount)
+        this.targetAmount = baseAmount * this.exchangeRate;
     }
-
+    getTargetAmount(){
+      return this.baseAmount * this.exchangeRate;
+    }
 }
