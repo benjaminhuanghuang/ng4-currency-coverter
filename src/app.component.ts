@@ -8,9 +8,10 @@ import { ExchangeService } from './exchange.service';
   selector: 'currency-converter',
   template: `
     Convert: <input type="number" [(ngModel)]="baseAmount" [class.error]="isInvalid(baseAmount)">
-    <currency-select [selected]="baseCurrency"></currency-select>
+    <currency-select [(selected)]="baseCurrency"></currency-select>
     <strong>{{targetAmount}}</strong> 
-    <currency-select [selected]="targetCurrency"></currency-select>
+    <currency-select [(selected)]="targetCurrency"></currency-select>
+    <p>({{baseCurrency}} to {{targetCurrency}})</p>
   `,
   styles: [`
     input[type=number] {
@@ -36,19 +37,13 @@ export class AppComponent {
   // Need add provider in app.module
   constructor(private exchangeService: ExchangeService) {
   }
-  // text changed
-  update1Way(baseAmount) {
-    console.info("should update", baseAmount);
-    this.baseAmount = parseFloat(baseAmount)
-  }
+
   update(baseAmount) {
     this.baseAmount = baseAmount;
   }
 
   get targetAmount() {
-    console.info('baseAmount valid: ', Number.isFinite(this.baseAmount));
     const exchangeRate = this.exchangeService.getExchangeRate(this.baseCurrency, this.targetCurrency);
-
     return this.baseAmount * exchangeRate;
   }
 
