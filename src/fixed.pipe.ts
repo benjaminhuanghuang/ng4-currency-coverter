@@ -7,3 +7,4 @@ export class FixedPipe implements PipeTransform {
     return value.toFixed(digits);
   }
 }
+ 
