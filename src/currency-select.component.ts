@@ -1,4 +1,4 @@
-import { Component, Input,Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ExchangeService } from './exchange.service';
 
 @Component({
@@ -9,12 +9,11 @@ import { ExchangeService } from './exchange.service';
       <option *ngFor="let currency of supportedCurrencies" [value]="currency">{{currency}}</option>
     </select>
   `
-}) 
+})
 export class CurrencySelectComponent {
-    @Input()    // can set this property from outside
-    selected: string;
-    @Output()
-    selectedChange = new EventEmitter<string>();
+    // can set this property from outside
+    @Input() selected: string;
+    @Output() selectedChange = new EventEmitter<string>();
 
     private supportedCurrencies: string[];
 
@@ -22,8 +21,7 @@ export class CurrencySelectComponent {
         this.supportedCurrencies = exchangeService.supportedCurrencies;
     }
 
-    onSelectedChange(selected:string)
-    {
+    onSelectedChange(selected: string) {
         this.selected = selected;
         this.selectedChange.emit(selected);
     }

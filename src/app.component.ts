@@ -9,8 +9,9 @@ import { ExchangeService } from './exchange.service';
   template: `
     Convert: <input type="number" [(ngModel)]="baseAmount" [class.error]="isInvalid(baseAmount)">
     <currency-select [(selected)]="baseCurrency"></currency-select>
-    <strong>{{targetAmount}}</strong> 
+    <strong>{{targetAmount | fixed:1}}</strong> 
     <currency-select [(selected)]="targetCurrency"></currency-select>
+    <p *ngIf="isInvalid(baseAmount)">Please enter a valid amount </p>
     <p>({{baseCurrency}} to {{targetCurrency}})</p>
   `,
   styles: [`
@@ -44,6 +45,7 @@ export class AppComponent {
 
   get targetAmount() {
     const exchangeRate = this.exchangeService.getExchangeRate(this.baseCurrency, this.targetCurrency);
+    //return (this.baseAmount * exchangeRate).toFixed(2);  we don't want to return a string here.
     return this.baseAmount * exchangeRate;
   }
 

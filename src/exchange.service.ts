@@ -10,6 +10,8 @@ export class ExchangeService {
     supportedCurrencies = ["EUR", "GBP", "USD"];
 
     getExchangeRate(baseCurrency: string, targetCurrency: string) {
+        if (baseCurrency === targetCurrency)
+            return 1;
         return this.exchangeRates[baseCurrency + "/" + targetCurrency];
     }
 }
