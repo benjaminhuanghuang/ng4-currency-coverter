@@ -7,8 +7,10 @@ import { ExchangeService } from './exchange.service';
 @Component({
   selector: 'currency-converter',
   template: `
-    Convert: <input type="number" bindon-ngModel="baseAmount" [class.error]="isInvalid(baseAmount)">{{baseCurrency}}
-    <strong>{{targetAmount}}</strong> {{targetCurrency}}
+    Convert: <input type="number" [(ngModel)]="baseAmount" [class.error]="isInvalid(baseAmount)">
+    <currency-select [selected]="baseCurrency"></currency-select>
+    <strong>{{targetAmount}}</strong> 
+    <currency-select [selected]="targetCurrency"></currency-select>
   `,
   styles: [`
     input[type=number] {
@@ -25,7 +27,6 @@ export class AppComponent {
   targetCurrency = 'GBP';
   baseAmount = 1;
 
-  exchangeService;
   // button click
   // update(baseAmount){
   //     console.info("should update", baseAmount);
@@ -33,8 +34,7 @@ export class AppComponent {
   // }
 
   // Need add provider in app.module
-  constructor(exchangeService: ExchangeService) {
-    this.exchangeService = exchangeService;
+  constructor(private exchangeService: ExchangeService) {
   }
   // text changed
   update1Way(baseAmount) {
@@ -44,7 +44,7 @@ export class AppComponent {
   update(baseAmount) {
     this.baseAmount = baseAmount;
   }
-  
+
   get targetAmount() {
     console.info('baseAmount valid: ', Number.isFinite(this.baseAmount));
     const exchangeRate = this.exchangeService.getExchangeRate(this.baseCurrency, this.targetCurrency);

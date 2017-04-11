@@ -4,11 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
+import { CurrencySelectComponent } from './currency-select.component';
 import { ExchangeService } from './exchange.service';
 
 @NgModule({
   imports: [BrowserModule, FormsModule],
-  declarations: [AppComponent],
+  declarations: [AppComponent, CurrencySelectComponent],
   bootstrap: [AppComponent],
   providers: [ExchangeService]
 })
